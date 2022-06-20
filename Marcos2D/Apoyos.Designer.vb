@@ -33,19 +33,24 @@ Partial Class Apoyos
         '
         'dgvApoyos
         '
+        Me.dgvApoyos.AllowUserToAddRows = False
+        Me.dgvApoyos.AllowUserToDeleteRows = False
         Me.dgvApoyos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvApoyos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.nodoId, Me.GradoX, Me.GradoY, Me.GradoM})
-        Me.dgvApoyos.Location = New System.Drawing.Point(48, 78)
+        Me.dgvApoyos.Location = New System.Drawing.Point(64, 96)
+        Me.dgvApoyos.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.dgvApoyos.Name = "dgvApoyos"
         Me.dgvApoyos.RowHeadersVisible = False
-        Me.dgvApoyos.Size = New System.Drawing.Size(435, 308)
+        Me.dgvApoyos.RowHeadersWidth = 51
+        Me.dgvApoyos.Size = New System.Drawing.Size(580, 379)
         Me.dgvApoyos.TabIndex = 0
         '
         'btnApoyos
         '
-        Me.btnApoyos.Location = New System.Drawing.Point(48, 402)
+        Me.btnApoyos.Location = New System.Drawing.Point(64, 495)
+        Me.btnApoyos.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnApoyos.Name = "btnApoyos"
-        Me.btnApoyos.Size = New System.Drawing.Size(75, 23)
+        Me.btnApoyos.Size = New System.Drawing.Size(100, 28)
         Me.btnApoyos.TabIndex = 1
         Me.btnApoyos.Text = "Regresar"
         Me.btnApoyos.UseVisualStyleBackColor = True
@@ -53,30 +58,39 @@ Partial Class Apoyos
         'nodoId
         '
         Me.nodoId.HeaderText = "Nodo"
+        Me.nodoId.MinimumWidth = 6
         Me.nodoId.Name = "nodoId"
+        Me.nodoId.Width = 90
         '
         'GradoX
         '
         Me.GradoX.HeaderText = "Rx"
+        Me.GradoX.MinimumWidth = 6
         Me.GradoX.Name = "GradoX"
+        Me.GradoX.Width = 90
         '
         'GradoY
         '
         Me.GradoY.HeaderText = "Ry"
+        Me.GradoY.MinimumWidth = 6
         Me.GradoY.Name = "GradoY"
+        Me.GradoY.Width = 90
         '
         'GradoM
         '
         Me.GradoM.HeaderText = "M"
+        Me.GradoM.MinimumWidth = 6
         Me.GradoM.Name = "GradoM"
+        Me.GradoM.Width = 90
         '
         'Apoyos
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(531, 450)
+        Me.ClientSize = New System.Drawing.Size(708, 554)
         Me.Controls.Add(Me.btnApoyos)
         Me.Controls.Add(Me.dgvApoyos)
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "Apoyos"
         Me.Text = "Apoyos"
         CType(Me.dgvApoyos, System.ComponentModel.ISupportInitialize).EndInit()

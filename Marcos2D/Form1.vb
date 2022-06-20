@@ -25,9 +25,32 @@ Public Class Form1
             dgvNodos.Rows(i - 1).Cells(0).Value = i
         Next
 
+        'Manejo de unidades
+        If optES.Checked = True Then
+            dgvNodos.Columns(1).HeaderText = "X (in)"
+            dgvNodos.Columns(2).HeaderText = "Y (in)"
+        End If
+
+        If optSI.Checked = True Then
+            dgvNodos.Columns(1).HeaderText = "X (m)"
+            dgvNodos.Columns(2).HeaderText = "Y (m)"
+        End If
+
         'Formato de Data Grid View dgvElementos
 
         dgvElementos.RowCount = elementos
+
+        If optES.Checked = True Then
+            dgvElementos.Columns(3).HeaderText = "E (ksi)"
+            dgvElementos.Columns(4).HeaderText = "A (in2)"
+            dgvElementos.Columns(5).HeaderText = "Ine (in4)"
+        End If
+
+        If optSI.Checked = True Then
+            dgvElementos.Columns(3).HeaderText = "E (Kg/m2)"
+            dgvElementos.Columns(4).HeaderText = "A (m2)"
+            dgvElementos.Columns(5).HeaderText = "Ine (m4)"
+        End If
 
 
         'Enumerar los nudos
@@ -63,6 +86,18 @@ Public Class Form1
             Apoyos.dgvApoyos.Rows(i - 1).Cells(0).Value = i
         Next
 
+        If optES.Checked = True Then
+            frmCargasNodos.dgvCargasNodos.Columns(1).HeaderText = "Px (kips)"
+            frmCargasNodos.dgvCargasNodos.Columns(2).HeaderText = "Py (kips)"
+            frmCargasNodos.dgvCargasNodos.Columns(3).HeaderText = "M (kips-in)"
+        End If
+
+        If optSI.Checked = True Then
+            frmCargasNodos.dgvCargasNodos.Columns(1).HeaderText = "Px (kg)"
+            frmCargasNodos.dgvCargasNodos.Columns(2).HeaderText = "Py (kg)"
+            frmCargasNodos.dgvCargasNodos.Columns(3).HeaderText = "M (kg-m)"
+        End If
+
         'Formato de DataGridView en formulario Cargas Puntuales
         frmCargasNodos.dgvCargasNodos.RowCount = nodos
         'Enumerar los nodos
@@ -76,6 +111,22 @@ Public Class Form1
         For i = 1 To elementos
             frmCargasElementos.dgvCargasElem.Rows(i - 1).Cells(0).Value = i
         Next
+
+        If optES.Checked = True Then
+            frmCargasElementos.dgvCargasElem.Columns(1).HeaderText = "w (kips/in)"
+            frmCargasElementos.dgvCargasElem.Columns(2).HeaderText = "P (kips)"
+            frmCargasElementos.dgvCargasElem.Columns(3).HeaderText = "a (in)"
+            frmCargasElementos.dgvCargasElem.Columns(4).HeaderText = "b (in)"
+
+        End If
+
+        If optSI.Checked = True Then
+            frmCargasElementos.dgvCargasElem.Columns(1).HeaderText = "w (kg/m)"
+            frmCargasElementos.dgvCargasElem.Columns(2).HeaderText = "P (kg)"
+            frmCargasElementos.dgvCargasElem.Columns(3).HeaderText = "a (m)"
+            frmCargasElementos.dgvCargasElem.Columns(4).HeaderText = "b (m)"
+
+        End If
 
 
         'Encender los elementos del formulario que estaban apagados inicialmente
@@ -454,6 +505,8 @@ Public Class Form1
 
         'Impresion de los desplazamientos calculados
         frmResultados.dgvDesplaz.RowCount = incognitasDesp
+
+        'Encabezados
         For i = 1 To incognitasDesp
             frmResultados.dgvDesplaz.Rows(i - 1).Cells(0).Value = D(Pos(i))
             frmResultados.dgvDesplaz.Rows(i - 1).Cells(1).Value = Str(Q(i))
