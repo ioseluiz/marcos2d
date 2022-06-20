@@ -1,0 +1,16 @@
+C:\Users\Jose Luis\source\repos\Marcos2D\Marcos2D\obj\Debug\Marcos2D.Apoyos.resources
+C:\Users\Jose Luis\source\repos\Marcos2D\Marcos2D\obj\Debug\Marcos2D.Form1.resources
+C:\Users\Jose Luis\source\repos\Marcos2D\Marcos2D\obj\Debug\Marcos2D.frmCargasNodos.resources
+C:\Users\Jose Luis\source\repos\Marcos2D\Marcos2D\obj\Debug\Marcos2D.Resources.resources
+C:\Users\Jose Luis\source\repos\Marcos2D\Marcos2D\obj\Debug\Marcos2D.vbproj.GenerateResource.cache
+C:\Users\Jose Luis\source\repos\Marcos2D\Marcos2D\obj\Debug\Marcos2D.vbproj.CoreCompileInputs.cache
+C:\Users\Jose Luis\source\repos\Marcos2D\Marcos2D\bin\Debug\Marcos2D.exe.config
+C:\Users\Jose Luis\source\repos\Marcos2D\Marcos2D\bin\Debug\Marcos2D.exe
+C:\Users\Jose Luis\source\repos\Marcos2D\Marcos2D\bin\Debug\Marcos2D.pdb
+C:\Users\Jose Luis\source\repos\Marcos2D\Marcos2D\bin\Debug\Marcos2D.xml
+C:\Users\Jose Luis\source\repos\Marcos2D\Marcos2D\obj\Debug\Marcos2D.exe
+C:\Users\Jose Luis\source\repos\Marcos2D\Marcos2D\obj\Debug\Marcos2D.xml
+C:\Users\Jose Luis\source\repos\Marcos2D\Marcos2D\obj\Debug\Marcos2D.pdb
+C:\Users\Jose Luis\source\repos\Marcos2D\Marcos2D\obj\Debug\Marcos2D.vbprojAssemblyReference.cache
+C:\Users\Jose Luis\source\repos\Marcos2D\Marcos2D\obj\Debug\Marcos2D.frmCargasElementos.resources
+C:\Users\Jose Luis\source\repos\Marcos2D\Marcos2D\obj\Debug\Marcos2D.frmResultados.resources
