@@ -33,6 +33,8 @@ Partial Class frmCargasNodos
         '
         'dgvCargasNodos
         '
+        Me.dgvCargasNodos.AllowUserToAddRows = False
+        Me.dgvCargasNodos.AllowUserToDeleteRows = False
         Me.dgvCargasNodos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvCargasNodos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Nodo, Me.CargaX, Me.CargaY, Me.FuerzaM})
         Me.dgvCargasNodos.Location = New System.Drawing.Point(76, 44)

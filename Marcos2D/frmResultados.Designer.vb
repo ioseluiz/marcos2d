@@ -44,10 +44,12 @@ Partial Class frmResultados
         '
         'dgvDesplaz
         '
+        Me.dgvDesplaz.AllowUserToAddRows = False
+        Me.dgvDesplaz.AllowUserToDeleteRows = False
         Me.dgvDesplaz.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvDesplaz.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.GdLib, Me.Resultado})
         Me.dgvDesplaz.Location = New System.Drawing.Point(9, 29)
-        Me.dgvDesplaz.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.dgvDesplaz.Margin = New System.Windows.Forms.Padding(2)
         Me.dgvDesplaz.Name = "dgvDesplaz"
         Me.dgvDesplaz.RowHeadersVisible = False
         Me.dgvDesplaz.RowHeadersWidth = 51
@@ -72,7 +74,7 @@ Partial Class frmResultados
         'btnRegresar
         '
         Me.btnRegresar.Location = New System.Drawing.Point(10, 319)
-        Me.btnRegresar.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnRegresar.Margin = New System.Windows.Forms.Padding(2)
         Me.btnRegresar.Name = "btnRegresar"
         Me.btnRegresar.Size = New System.Drawing.Size(56, 24)
         Me.btnRegresar.TabIndex = 1
@@ -86,7 +88,7 @@ Partial Class frmResultados
         Me.dgvReaccion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvReaccion.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Reacciones, Me.Valor})
         Me.dgvReaccion.Location = New System.Drawing.Point(267, 29)
-        Me.dgvReaccion.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.dgvReaccion.Margin = New System.Windows.Forms.Padding(2)
         Me.dgvReaccion.Name = "dgvReaccion"
         Me.dgvReaccion.RowHeadersVisible = False
         Me.dgvReaccion.RowHeadersWidth = 51
@@ -164,7 +166,7 @@ Partial Class frmResultados
         Me.Controls.Add(Me.dgvReaccion)
         Me.Controls.Add(Me.btnRegresar)
         Me.Controls.Add(Me.dgvDesplaz)
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "frmResultados"
         Me.Text = "frmResultados"
         CType(Me.dgvDesplaz, System.ComponentModel.ISupportInitialize).EndInit()

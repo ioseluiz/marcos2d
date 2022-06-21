@@ -27,8 +27,8 @@ Public Class Form1
 
         'Manejo de unidades
         If optES.Checked = True Then
-            dgvNodos.Columns(1).HeaderText = "X (in)"
-            dgvNodos.Columns(2).HeaderText = "Y (in)"
+            dgvNodos.Columns(1).HeaderText = "X (ft)"
+            dgvNodos.Columns(2).HeaderText = "Y (ft)"
         End If
 
         If optSI.Checked = True Then
@@ -47,7 +47,7 @@ Public Class Form1
         End If
 
         If optSI.Checked = True Then
-            dgvElementos.Columns(3).HeaderText = "E (Kg/m2)"
+            dgvElementos.Columns(3).HeaderText = "E (GPa)"
             dgvElementos.Columns(4).HeaderText = "A (m2)"
             dgvElementos.Columns(5).HeaderText = "Ine (m4)"
         End If
@@ -89,13 +89,13 @@ Public Class Form1
         If optES.Checked = True Then
             frmCargasNodos.dgvCargasNodos.Columns(1).HeaderText = "Px (kips)"
             frmCargasNodos.dgvCargasNodos.Columns(2).HeaderText = "Py (kips)"
-            frmCargasNodos.dgvCargasNodos.Columns(3).HeaderText = "M (kips-in)"
+            frmCargasNodos.dgvCargasNodos.Columns(3).HeaderText = "M (kips-ft)"
         End If
 
         If optSI.Checked = True Then
-            frmCargasNodos.dgvCargasNodos.Columns(1).HeaderText = "Px (kg)"
-            frmCargasNodos.dgvCargasNodos.Columns(2).HeaderText = "Py (kg)"
-            frmCargasNodos.dgvCargasNodos.Columns(3).HeaderText = "M (kg-m)"
+            frmCargasNodos.dgvCargasNodos.Columns(1).HeaderText = "Px (KN)"
+            frmCargasNodos.dgvCargasNodos.Columns(2).HeaderText = "Py (kKN)"
+            frmCargasNodos.dgvCargasNodos.Columns(3).HeaderText = "M (KN-m)"
         End If
 
         'Formato de DataGridView en formulario Cargas Puntuales
@@ -113,16 +113,16 @@ Public Class Form1
         Next
 
         If optES.Checked = True Then
-            frmCargasElementos.dgvCargasElem.Columns(1).HeaderText = "w (kips/in)"
+            frmCargasElementos.dgvCargasElem.Columns(1).HeaderText = "w (kips/ft)"
             frmCargasElementos.dgvCargasElem.Columns(2).HeaderText = "P (kips)"
-            frmCargasElementos.dgvCargasElem.Columns(3).HeaderText = "a (in)"
-            frmCargasElementos.dgvCargasElem.Columns(4).HeaderText = "b (in)"
+            frmCargasElementos.dgvCargasElem.Columns(3).HeaderText = "a (ft)"
+            frmCargasElementos.dgvCargasElem.Columns(4).HeaderText = "b (ft)"
 
         End If
 
         If optSI.Checked = True Then
-            frmCargasElementos.dgvCargasElem.Columns(1).HeaderText = "w (kg/m)"
-            frmCargasElementos.dgvCargasElem.Columns(2).HeaderText = "P (kg)"
+            frmCargasElementos.dgvCargasElem.Columns(1).HeaderText = "w (KN/m)"
+            frmCargasElementos.dgvCargasElem.Columns(2).HeaderText = "P (KN)"
             frmCargasElementos.dgvCargasElem.Columns(3).HeaderText = "a (m)"
             frmCargasElementos.dgvCargasElem.Columns(4).HeaderText = "b (m)"
 
@@ -133,6 +133,7 @@ Public Class Form1
         btnCalcular.Enabled = True
         btnApoyos.Enabled = True
         btnCargasNodos.Enabled = True
+        btnCargasElem.Enabled = True
         dgvElementos.Enabled = True
         dgvNodos.Enabled = True
 
@@ -149,13 +150,19 @@ Public Class Form1
         Dim L() As Double, C() As Double, S() As Double
         Dim F() As Object, D() As Object, SP() As Object
         Dim P() As Double, K(,) As Double
-        Dim i As Integer
+        Dim i As Integer, factor As Double
         nodos = CInt(txtNudos.Text)
         elementos = CInt(txtElementos.Text)
         ReDim X(nodos), Y(nodos)
         For i = 1 To nodos
-            X(i) = dgvNodos.Rows(i - 1).Cells(1).Value
-            Y(i) = dgvNodos.Rows(i - 1).Cells(2).Value
+            If optES.Checked = True Then
+                factor = 12
+            End If
+            If optSI.Checked = True Then
+                factor = 1
+            End If
+            X(i) = dgvNodos.Rows(i - 1).Cells(1).Value * factor
+            Y(i) = dgvNodos.Rows(i - 1).Cells(2).Value * factor
         Next
         ReDim Ni(elementos), Nj(elementos), A(elementos), Ine(elementos), modE(elementos)
         For i = 1 To elementos
@@ -186,10 +193,13 @@ Public Class Form1
         'Calcular Matriz de Rigidez Global de la Estructura
         ReDim K(3 * nodos, 3 * nodos)
         For i = 1 To elementos
+            Console.WriteLine("ELEMENTO " + Str(i))
             'Fila 1
             K(3 * Ni(i) - 2, 3 * Ni(i) - 2) += A(i) * modE(i) / L(i) * C(i) ^ 2 + 12 * modE(i) * Ine(i) / L(i) ^ 3 * S(i) ^ 2
             K(3 * Ni(i) - 2, 3 * Ni(i) - 1) += (A(i) * modE(i) / L(i) - 12 * modE(i) * Ine(i) / L(i) ^ 3) * C(i) * S(i)
             K(3 * Ni(i) - 2, 3 * Ni(i)) += -6 * modE(i) * Ine(i) / L(i) ^ 2 * S(i)
+            Console.WriteLine("linea 1,3")
+            Console.WriteLine(Str(K(3 * Ni(i) - 2, 3 * Ni(i))))
             K(3 * Ni(i) - 2, 3 * Nj(i) - 2) += -(A(i) * modE(i) / L(i) * C(i) ^ 2 + 12 * modE(i) * Ine(i) / L(i) ^ 3 * S(i) ^ 2)
             K(3 * Ni(i) - 2, 3 * Nj(i) - 1) += -(A(i) * modE(i) / L(i) - 12 * modE(i) * Ine(i) / L(i) ^ 3) * C(i) * S(i)
             K(3 * Ni(i) - 2, 3 * Nj(i)) += -6 * modE(i) * Ine(i) / L(i) ^ 2 * S(i)
@@ -214,10 +224,11 @@ Public Class Form1
             K(3 * Nj(i) - 2, 3 * Nj(i) - 2) += modE(i) * A(i) / L(i) * C(i) ^ 2 + 12 * modE(i) * Ine(i) / L(i) ^ 3 * S(i) ^ 2
             K(3 * Nj(i) - 2, 3 * Nj(i) - 1) += (modE(i) * A(i) / L(i) - 12 * modE(i) * Ine(i) / L(i) ^ 3) * C(i) * S(i)
             K(3 * Nj(i) - 2, 3 * Nj(i)) += 6 * modE(i) * Ine(i) / L(i) ^ 2 * S(i)
+            Console.WriteLine("linea 4,6")
+            Console.WriteLine(Str(K(3 * Nj(i) - 2, 3 * Nj(i))))
             'Fila 5
             K(3 * Nj(i) - 1, 3 * Ni(i) - 2) += -(modE(i) * A(i) / L(i) - 12 * modE(i) * Ine(i) / L(i) ^ 3) * C(i) * S(i)
-            Console.WriteLine("linea 5,1")
-            Console.WriteLine(Str(K(3 * Nj(i) - 1, 3 * Ni(i) - 2)))
+
             K(3 * Nj(i) - 1, 3 * Ni(i) - 1) += -(modE(i) * A(i) / L(i) * S(i) ^ 2 + 12 * modE(i) * Ine(i) / L(i) ^ 3 * C(i) ^ 2)
             K(3 * Nj(i) - 1, 3 * Ni(i)) += -6 * modE(i) * Ine(i) / L(i) ^ 2 * C(i)
             K(3 * Nj(i) - 1, 3 * Nj(i) - 2) += (modE(i) * A(i) / L(i) - 12 * modE(i) * Ine(i) / L(i) ^ 3) * C(i) * S(i)
@@ -316,10 +327,16 @@ Public Class Form1
         Dim VLocal(6) As Double, VGlobal(6) As Double, MTr(,) As Double
         For i = 1 To elementos
             ReDim VLocal(6), VGlobal(6), MTr(6, 6)
-            w = CDbl(frmCargasElementos.dgvCargasElem.Rows(i - 1).Cells(1).Value)
+            If optES.Checked = True Then
+                factor = 12
+            End If
+            If optSI.Checked = True Then
+                factor = 1
+            End If
+            w = CDbl(frmCargasElementos.dgvCargasElem.Rows(i - 1).Cells(1).Value) / factor
             cpunt = CDbl(frmCargasElementos.dgvCargasElem.Rows(i - 1).Cells(2).Value)
-            distA = CDbl(frmCargasElementos.dgvCargasElem.Rows(i - 1).Cells(3).Value)
-            distB = CDbl(frmCargasElementos.dgvCargasElem.Rows(i - 1).Cells(4).Value)
+            distA = CDbl(frmCargasElementos.dgvCargasElem.Rows(i - 1).Cells(3).Value) * factor
+            distB = CDbl(frmCargasElementos.dgvCargasElem.Rows(i - 1).Cells(4).Value) * factor
 
             'Carga Distribuida
             'Valores en coordenadas locales
@@ -507,9 +524,24 @@ Public Class Form1
         frmResultados.dgvDesplaz.RowCount = incognitasDesp
 
         'Encabezados
+        Dim singleChar As Char
         For i = 1 To incognitasDesp
             frmResultados.dgvDesplaz.Rows(i - 1).Cells(0).Value = D(Pos(i))
-            frmResultados.dgvDesplaz.Rows(i - 1).Cells(1).Value = Str(Q(i))
+            singleChar = D(Pos(i)).Chars(0)
+            Console.WriteLine(singleChar)
+            If singleChar = "U" Then
+                If optES.Checked = True Then
+                    frmResultados.dgvDesplaz.Rows(i - 1).Cells(1).Value = Str(System.Math.Round(Q(i), 4)) + " in"
+                End If
+                If optSI.Checked = True Then
+                    frmResultados.dgvDesplaz.Rows(i - 1).Cells(1).Value = Str(System.Math.Round(Q(i) / 1000, 4)) + " mm"
+                End If
+
+            End If
+            If singleChar = "r" Then
+                frmResultados.dgvDesplaz.Rows(i - 1).Cells(1).Value = Str(System.Math.Round(Q(i), 4)) + " rad"
+            End If
+
 
         Next
 
@@ -656,7 +688,7 @@ Public Class Form1
     Private Function MultMatriz(T(,) As Double, G() As Double) As Double()
         Dim sumf As Double
         Dim Result() As Double
-        ReDim Result(G.GetLength(0) - 1)
+        ReDim Result(T.GetLength(0) - 1)
         For h = 1 To T.GetLength(0) - 1
             sumf = 0
             For j = 1 To G.GetLength(0) - 1
