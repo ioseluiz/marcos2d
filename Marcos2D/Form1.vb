@@ -168,7 +168,13 @@ Public Class Form1
         For i = 1 To elementos
             Ni(i) = dgvElementos.Rows(i - 1).Cells(1).Value
             Nj(i) = dgvElementos.Rows(i - 1).Cells(2).Value
-            modE(i) = dgvElementos.Rows(i - 1).Cells(3).Value
+            If optES.Checked = True Then
+                modE(i) = dgvElementos.Rows(i - 1).Cells(3).Value
+            End If
+            If optSI.Checked = True Then
+                modE(i) = dgvElementos.Rows(i - 1).Cells(3).Value * 1000000000 / 1000
+            End If
+            'modE(i) = dgvElementos.Rows(i - 1).Cells(3).Value
             A(i) = dgvElementos.Rows(i - 1).Cells(4).Value
             Ine(i) = dgvElementos.Rows(i - 1).Cells(5).Value
         Next
@@ -531,15 +537,15 @@ Public Class Form1
             Console.WriteLine(singleChar)
             If singleChar = "U" Then
                 If optES.Checked = True Then
-                    frmResultados.dgvDesplaz.Rows(i - 1).Cells(1).Value = Str(System.Math.Round(Q(i), 4)) + " in"
+                    frmResultados.dgvDesplaz.Rows(i - 1).Cells(1).Value = Str(System.Math.Round(Q(i), 5)) + " in"
                 End If
                 If optSI.Checked = True Then
-                    frmResultados.dgvDesplaz.Rows(i - 1).Cells(1).Value = Str(System.Math.Round(Q(i) / 1000, 4)) + " mm"
+                    frmResultados.dgvDesplaz.Rows(i - 1).Cells(1).Value = Str(System.Math.Round(Q(i) * 1000, 5)) + " mm"
                 End If
 
             End If
             If singleChar = "r" Then
-                frmResultados.dgvDesplaz.Rows(i - 1).Cells(1).Value = Str(System.Math.Round(Q(i), 4)) + " rad"
+                frmResultados.dgvDesplaz.Rows(i - 1).Cells(1).Value = Str(System.Math.Round(Q(i), 5)) + " rad"
             End If
 
 
@@ -662,7 +668,45 @@ Public Class Form1
             'Multiplicacion
             FL = MultMatriz(KL, DL)
 
+            'Agregar efecto de la solucion particular en coordenadas globales
+            ReDim VLocal(6), VGlobal(6)
+            If optES.Checked = True Then
+                factor = 12
+            End If
+            If optSI.Checked = True Then
+                factor = 1
+            End If
+            w = CDbl(frmCargasElementos.dgvCargasElem.Rows(elem - 1).Cells(1).Value) / factor
+            cpunt = CDbl(frmCargasElementos.dgvCargasElem.Rows(elem - 1).Cells(2).Value)
+            distA = CDbl(frmCargasElementos.dgvCargasElem.Rows(elem - 1).Cells(3).Value) * factor
+            distB = CDbl(frmCargasElementos.dgvCargasElem.Rows(elem - 1).Cells(4).Value) * factor
+
+            'Carga Distribuida
+            'Valores en coordenadas locales
+            'Nudo Inicial
+            VLocal(1) += 0
+            VLocal(2) += w * L(elem) / 2
+            VLocal(3) += w * L(elem) ^ 2 / 12
+            'Nudo Final
+            VLocal(4) += 0
+            VLocal(5) += w * L(elem) / 2
+            VLocal(6) += -w * L(elem) ^ 2 / 12
+
+            'Carga Puntual
+            'Valores en coordenadas locales
+            'Nudo Inicial
+            VLocal(1) += 0
+            VLocal(2) += cpunt * distB ^ 2 / L(elem) ^ 2 * (3 - 2 * distB / L(elem))
+            VLocal(3) += cpunt * distA * distB ^ 2 / L(elem) ^ 2
+            'Nudo Final
+            VLocal(4) += 0
+            VLocal(5) += cpunt * distA ^ 2 / L(elem) ^ 2 * (3 - 2 * distA / L(elem))
+            VLocal(6) += -cpunt * distA ^ 2 * distB / L(elem) ^ 2
+
             'Impresion de las Fuerzas en Coordenadas Locales
+            For h = 1 To 6
+                FL(h) += VLocal(h)
+            Next
 
             frmResultados.dgvFuerzas.Rows(elem - 1).Cells(0).Value = Str(elem)
             frmResultados.dgvFuerzas.Rows(elem - 1).Cells(1).Value = Str(FL(1))

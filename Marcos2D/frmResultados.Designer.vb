@@ -129,12 +129,12 @@ Partial Class frmResultados
         '
         'Fxi
         '
-        Me.Fxi.HeaderText = "Fxi"
+        Me.Fxi.HeaderText = "Pi"
         Me.Fxi.Name = "Fxi"
         '
         'Fyi
         '
-        Me.Fyi.HeaderText = "Fyi"
+        Me.Fyi.HeaderText = "Vi"
         Me.Fyi.Name = "Fyi"
         '
         'Mi
@@ -144,12 +144,12 @@ Partial Class frmResultados
         '
         'Fxj
         '
-        Me.Fxj.HeaderText = "Fxj"
+        Me.Fxj.HeaderText = "Pj"
         Me.Fxj.Name = "Fxj"
         '
         'Fyj
         '
-        Me.Fyj.HeaderText = "Fyj"
+        Me.Fyj.HeaderText = "Vj"
         Me.Fyj.Name = "Fyj"
         '
         'Mj
