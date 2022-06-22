@@ -562,9 +562,29 @@ Public Class Form1
         Next
         'Impresion de las reacciones calculadas
         frmResultados.dgvReaccion.RowCount = incognitasFuerza
+        Dim primerChar As Char
         For i = 1 To incognitasFuerza
+            'Impresion con las unidades para cada tipo de reaccion
             frmResultados.dgvReaccion.Rows(i - 1).Cells(0).Value = F(Posf(i))
-            frmResultados.dgvReaccion.Rows(i - 1).Cells(1).Value = Str(FS(i))
+            primerChar = F(Posf(i)).Chars(0)
+            If primerChar = "R" Then
+                If optSI.Checked = True Then
+                    frmResultados.dgvReaccion.Rows(i - 1).Cells(1).Value = Str(Math.Round(FS(i), 2)) + " KN"
+                End If
+                If optES.Checked = True Then
+                    frmResultados.dgvReaccion.Rows(i - 1).Cells(1).Value = Str(Math.Round(FS(i), 2)) + "kips"
+                End If
+            End If
+            If primerChar = "M" Then
+                If optSI.Checked = True Then
+                    frmResultados.dgvReaccion.Rows(i - 1).Cells(1).Value = Str(Math.Round(FS(i), 2)) + " KN-m"
+                End If
+                If optES.Checked = True Then
+                    frmResultados.dgvReaccion.Rows(i - 1).Cells(1).Value = Str(Math.Round(FS(i) / 12, 2)) + "kips-ft"
+                End If
+            End If
+
+
         Next
 
         'Reemplazar las incognitas en un nuevo vector de desplazamientos
@@ -709,12 +729,29 @@ Public Class Form1
             Next
 
             frmResultados.dgvFuerzas.Rows(elem - 1).Cells(0).Value = Str(elem)
-            frmResultados.dgvFuerzas.Rows(elem - 1).Cells(1).Value = Str(FL(1))
-            frmResultados.dgvFuerzas.Rows(elem - 1).Cells(2).Value = Str(FL(2))
-            frmResultados.dgvFuerzas.Rows(elem - 1).Cells(3).Value = Str(FL(3))
-            frmResultados.dgvFuerzas.Rows(elem - 1).Cells(4).Value = Str(FL(4))
-            frmResultados.dgvFuerzas.Rows(elem - 1).Cells(5).Value = Str(FL(5))
-            frmResultados.dgvFuerzas.Rows(elem - 1).Cells(6).Value = Str(FL(6))
+            If optSI.Checked = True Then
+                frmResultados.dgvFuerzas.Rows(elem - 1).Cells(1).Value = Str(Math.Round(FL(1), 2)) + " KN"
+                frmResultados.dgvFuerzas.Rows(elem - 1).Cells(2).Value = Str(Math.Round(FL(2), 2)) + " KN"
+                frmResultados.dgvFuerzas.Rows(elem - 1).Cells(3).Value = Str(Math.Round(FL(3), 2)) + " KN-m"
+                frmResultados.dgvFuerzas.Rows(elem - 1).Cells(4).Value = Str(Math.Round(FL(4), 2)) + " KN"
+                frmResultados.dgvFuerzas.Rows(elem - 1).Cells(5).Value = Str(Math.Round(FL(5), 2)) + " KN"
+                frmResultados.dgvFuerzas.Rows(elem - 1).Cells(6).Value = Str(Math.Round(FL(6), 2)) + " KN-m"
+            End If
+
+            If optES.Checked = True Then
+                frmResultados.dgvFuerzas.Rows(elem - 1).Cells(1).Value = Str(Math.Round(FL(1), 2)) + " kips"
+                frmResultados.dgvFuerzas.Rows(elem - 1).Cells(2).Value = Str(Math.Round(FL(2), 2)) + " kips"
+                frmResultados.dgvFuerzas.Rows(elem - 1).Cells(3).Value = Str(Math.Round(FL(3) / 12, 2)) + " kip-ft"
+                frmResultados.dgvFuerzas.Rows(elem - 1).Cells(4).Value = Str(Math.Round(FL(4), 2)) + " kips"
+                frmResultados.dgvFuerzas.Rows(elem - 1).Cells(5).Value = Str(Math.Round(FL(5), 2)) + " kips"
+                frmResultados.dgvFuerzas.Rows(elem - 1).Cells(6).Value = Str(Math.Round(FL(6) / 12, 2)) + " kip-ft"
+            End If
+
+
+
+
+
+
 
 
 
