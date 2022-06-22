@@ -572,7 +572,7 @@ Public Class Form1
                     frmResultados.dgvReaccion.Rows(i - 1).Cells(1).Value = Str(Math.Round(FS(i), 2)) + " KN"
                 End If
                 If optES.Checked = True Then
-                    frmResultados.dgvReaccion.Rows(i - 1).Cells(1).Value = Str(Math.Round(FS(i), 2)) + "kips"
+                    frmResultados.dgvReaccion.Rows(i - 1).Cells(1).Value = Str(Math.Round(FS(i), 2)) + " kips"
                 End If
             End If
             If primerChar = "M" Then
@@ -580,7 +580,7 @@ Public Class Form1
                     frmResultados.dgvReaccion.Rows(i - 1).Cells(1).Value = Str(Math.Round(FS(i), 2)) + " KN-m"
                 End If
                 If optES.Checked = True Then
-                    frmResultados.dgvReaccion.Rows(i - 1).Cells(1).Value = Str(Math.Round(FS(i) / 12, 2)) + "kips-ft"
+                    frmResultados.dgvReaccion.Rows(i - 1).Cells(1).Value = Str(Math.Round(FS(i) / 12, 2)) + " kips-ft"
                 End If
             End If
 
@@ -599,9 +599,10 @@ Public Class Form1
             FN(Posf(i)) = FS(i)
         Next
 
+
         'Calcular las fuerzas en los extremos de los elementos en coordenadas locales
         Dim TGL(,) As Double, DG() As Double, DL() As Double
-        Dim KL(,) As Double, FL() As Double
+        Dim KL(,) As Double, FL() As Double, PL() As Double, PCLocal() As Double
         frmResultados.dgvFuerzas.RowCount = elementos
         For elem = 1 To elementos
             ReDim TGL(6, 6)
@@ -651,10 +652,10 @@ Public Class Form1
             KL(1, 6) = 0
             'Fila 2
             KL(2, 1) = 0
-            KL(2, 2) = 12 * modE(elem) * Ine(elem) / L(elem)
+            KL(2, 2) = 12 * modE(elem) * Ine(elem) / L(elem) ^ 3
             KL(2, 3) = 6 * modE(elem) * Ine(elem) / L(elem) ^ 2
             KL(2, 4) = 0
-            KL(2, 5) = -12 * modE(elem) * Ine(elem) / L(elem)
+            KL(2, 5) = -12 * modE(elem) * Ine(elem) / L(elem) ^ 3
             KL(2, 6) = 6 * modE(elem) * Ine(elem) / L(elem) ^ 2
             'Fila 3
             KL(3, 1) = 0
@@ -672,10 +673,10 @@ Public Class Form1
             KL(4, 6) = 0
             'Fila 5
             KL(5, 1) = 0
-            KL(5, 2) = -12 * modE(elem) * Ine(elem) / L(elem)
+            KL(5, 2) = -12 * modE(elem) * Ine(elem) / L(elem) ^ 3
             KL(5, 3) = -6 * modE(elem) * Ine(elem) / L(elem) ^ 2
             KL(5, 4) = 0
-            KL(5, 5) = 12 * modE(elem) * Ine(elem) / L(elem)
+            KL(5, 5) = 12 * modE(elem) * Ine(elem) / L(elem) ^ 3
             KL(5, 6) = -6 * modE(elem) * Ine(elem) / L(elem) ^ 2
             'Fila 6
             KL(6, 1) = 0
@@ -687,6 +688,12 @@ Public Class Form1
 
             'Multiplicacion
             FL = MultMatriz(KL, DL)
+            'Imprimir FL
+            Console.WriteLine("FL")
+            Console.WriteLine("Elemento " + Str(elem))
+            For h = 1 To 6
+                Console.WriteLine("FL(" + Str(h) + ")= " + Str(FL(h)))
+            Next
 
             'Agregar efecto de la solucion particular en coordenadas globales
             ReDim VLocal(6), VGlobal(6)
@@ -726,6 +733,21 @@ Public Class Form1
             'Impresion de las Fuerzas en Coordenadas Locales
             For h = 1 To 6
                 FL(h) += VLocal(h)
+            Next
+
+            ReDim PL(6)
+            'Adicionar las cargas aplicadas directamente en los nodos en coordenadas locales
+            'Transformar P a coordenadas locales
+            PL(1) = P(3 * Ni(elem) - 2)
+            PL(2) = P(3 * Ni(elem) - 1)
+            PL(3) = P(3 * Ni(elem))
+            PL(4) = P(3 * Nj(elem) - 2)
+            PL(5) = P(3 * Nj(elem) - 1)
+            PL(6) = P(3 * Nj(elem))
+
+            PCLocal = MultMatriz(TGL, PL)
+            For h = 1 To 6
+                FL(h) += PCLocal(h)
             Next
 
             frmResultados.dgvFuerzas.Rows(elem - 1).Cells(0).Value = Str(elem)
