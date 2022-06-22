@@ -10,132 +10,144 @@ Public Class Form1
     End Sub
 
     Private Sub btnIngresar_Click(sender As Object, e As EventArgs) Handles btnIngresar.Click
-        Dim nodos As Integer, elementos As Integer
-        nodos = CInt(txtNudos.Text)
-        elementos = CInt(txtElementos.Text)
 
-        'MessageBox.Show(Str(nodos))
+        'Validar que las unidades han sido seleccionadas
+        If optES.Checked = True Or optSI.Checked = True Then
 
-        'Formato de Data Grid View dgvNodos
 
-        dgvNodos.RowCount = nodos
 
-        'Enumerar los nudos
-        For i = 1 To nodos
-            dgvNodos.Rows(i - 1).Cells(0).Value = i
-        Next
+            Dim nodos As Integer, elementos As Integer
+            nodos = CInt(txtNudos.Text)
+            elementos = CInt(txtElementos.Text)
 
-        'Manejo de unidades
-        If optES.Checked = True Then
-            dgvNodos.Columns(1).HeaderText = "X (ft)"
-            dgvNodos.Columns(2).HeaderText = "Y (ft)"
+            'MessageBox.Show(Str(nodos))
+
+            'Formato de Data Grid View dgvNodos
+
+            dgvNodos.RowCount = nodos
+
+            'Enumerar los nudos
+            For i = 1 To nodos
+                dgvNodos.Rows(i - 1).Cells(0).Value = i
+            Next
+
+            'Manejo de unidades
+            If optES.Checked = True Then
+                dgvNodos.Columns(1).HeaderText = "X (ft)"
+                dgvNodos.Columns(2).HeaderText = "Y (ft)"
+            End If
+
+            If optSI.Checked = True Then
+                dgvNodos.Columns(1).HeaderText = "X (m)"
+                dgvNodos.Columns(2).HeaderText = "Y (m)"
+            End If
+
+            'Formato de Data Grid View dgvElementos
+
+            dgvElementos.RowCount = elementos
+
+            If optES.Checked = True Then
+                dgvElementos.Columns(3).HeaderText = "E (ksi)"
+                dgvElementos.Columns(4).HeaderText = "A (in2)"
+                dgvElementos.Columns(5).HeaderText = "Ine (in4)"
+            End If
+
+            If optSI.Checked = True Then
+                dgvElementos.Columns(3).HeaderText = "E (GPa)"
+                dgvElementos.Columns(4).HeaderText = "A (m2)"
+                dgvElementos.Columns(5).HeaderText = "Ine (m4)"
+            End If
+
+
+            'Enumerar los nudos
+            For i = 1 To elementos
+                dgvElementos.Rows(i - 1).Cells(0).Value = i
+            Next
+
+            'Formato de Data Grid View para ingresar los apoyos
+            Apoyos.dgvApoyos.RowCount = nodos
+
+
+            'Loop en cada fila
+            For Each row As DataGridViewRow In Apoyos.dgvApoyos.Rows
+                'Referenciar la celda con combobox
+                Dim comboBoxCell As DataGridViewComboBoxCell = CType(row.Cells(1), DataGridViewComboBoxCell)
+                'Insertar el item por default del ComboBoxCell
+                comboBoxCell.Items.Add("SI")
+                comboBoxCell.Items.Add("NO")
+
+                Dim comboBoxCell1 As DataGridViewComboBoxCell = CType(row.Cells(2), DataGridViewComboBoxCell)
+                'Insertar el item por default del ComboBoxCell
+                comboBoxCell1.Items.Add("SI")
+                comboBoxCell1.Items.Add("NO")
+
+                Dim comboBoxCell2 As DataGridViewComboBoxCell = CType(row.Cells(3), DataGridViewComboBoxCell)
+                'Insertar el item por default del ComboBoxCell
+                comboBoxCell2.Items.Add("SI")
+                comboBoxCell2.Items.Add("NO")
+
+            Next
+
+            For i = 1 To nodos
+                Apoyos.dgvApoyos.Rows(i - 1).Cells(0).Value = i
+            Next
+
+            If optES.Checked = True Then
+                frmCargasNodos.dgvCargasNodos.Columns(1).HeaderText = "Px (kips)"
+                frmCargasNodos.dgvCargasNodos.Columns(2).HeaderText = "Py (kips)"
+                frmCargasNodos.dgvCargasNodos.Columns(3).HeaderText = "M (kips-ft)"
+            End If
+
+            If optSI.Checked = True Then
+                frmCargasNodos.dgvCargasNodos.Columns(1).HeaderText = "Px (KN)"
+                frmCargasNodos.dgvCargasNodos.Columns(2).HeaderText = "Py (kKN)"
+                frmCargasNodos.dgvCargasNodos.Columns(3).HeaderText = "M (KN-m)"
+            End If
+
+            'Formato de DataGridView en formulario Cargas Puntuales
+            frmCargasNodos.dgvCargasNodos.RowCount = nodos
+            'Enumerar los nodos
+            For i = 1 To nodos
+                frmCargasNodos.dgvCargasNodos.Rows(i - 1).Cells(0).Value = i
+            Next
+
+            'Formato de DataGridView en formulario Cargas en Elementos
+            frmCargasElementos.dgvCargasElem.RowCount = elementos
+            'Enumerar los elementos
+            For i = 1 To elementos
+                frmCargasElementos.dgvCargasElem.Rows(i - 1).Cells(0).Value = i
+            Next
+
+            If optES.Checked = True Then
+                frmCargasElementos.dgvCargasElem.Columns(1).HeaderText = "w (kips/ft)"
+                frmCargasElementos.dgvCargasElem.Columns(2).HeaderText = "P (kips)"
+                frmCargasElementos.dgvCargasElem.Columns(3).HeaderText = "a (ft)"
+                frmCargasElementos.dgvCargasElem.Columns(4).HeaderText = "b (ft)"
+
+            End If
+
+            If optSI.Checked = True Then
+                frmCargasElementos.dgvCargasElem.Columns(1).HeaderText = "w (KN/m)"
+                frmCargasElementos.dgvCargasElem.Columns(2).HeaderText = "P (KN)"
+                frmCargasElementos.dgvCargasElem.Columns(3).HeaderText = "a (m)"
+                frmCargasElementos.dgvCargasElem.Columns(4).HeaderText = "b (m)"
+
+            End If
+
+
+            'Encender los elementos del formulario que estaban apagados inicialmente
+            btnCalcular.Enabled = True
+            btnApoyos.Enabled = True
+            btnCargasNodos.Enabled = True
+            btnCargasElem.Enabled = True
+            dgvElementos.Enabled = True
+            dgvNodos.Enabled = True
+
+        Else
+            MsgBox("Debe Seleccionar una opcion para las unidades", vbCritical)
+
+
         End If
-
-        If optSI.Checked = True Then
-            dgvNodos.Columns(1).HeaderText = "X (m)"
-            dgvNodos.Columns(2).HeaderText = "Y (m)"
-        End If
-
-        'Formato de Data Grid View dgvElementos
-
-        dgvElementos.RowCount = elementos
-
-        If optES.Checked = True Then
-            dgvElementos.Columns(3).HeaderText = "E (ksi)"
-            dgvElementos.Columns(4).HeaderText = "A (in2)"
-            dgvElementos.Columns(5).HeaderText = "Ine (in4)"
-        End If
-
-        If optSI.Checked = True Then
-            dgvElementos.Columns(3).HeaderText = "E (GPa)"
-            dgvElementos.Columns(4).HeaderText = "A (m2)"
-            dgvElementos.Columns(5).HeaderText = "Ine (m4)"
-        End If
-
-
-        'Enumerar los nudos
-        For i = 1 To elementos
-            dgvElementos.Rows(i - 1).Cells(0).Value = i
-        Next
-
-        'Formato de Data Grid View para ingresar los apoyos
-        Apoyos.dgvApoyos.RowCount = nodos
-
-
-        'Loop en cada fila
-        For Each row As DataGridViewRow In Apoyos.dgvApoyos.Rows
-            'Referenciar la celda con combobox
-            Dim comboBoxCell As DataGridViewComboBoxCell = CType(row.Cells(1), DataGridViewComboBoxCell)
-            'Insertar el item por default del ComboBoxCell
-            comboBoxCell.Items.Add("SI")
-            comboBoxCell.Items.Add("NO")
-
-            Dim comboBoxCell1 As DataGridViewComboBoxCell = CType(row.Cells(2), DataGridViewComboBoxCell)
-            'Insertar el item por default del ComboBoxCell
-            comboBoxCell1.Items.Add("SI")
-            comboBoxCell1.Items.Add("NO")
-
-            Dim comboBoxCell2 As DataGridViewComboBoxCell = CType(row.Cells(3), DataGridViewComboBoxCell)
-            'Insertar el item por default del ComboBoxCell
-            comboBoxCell2.Items.Add("SI")
-            comboBoxCell2.Items.Add("NO")
-
-        Next
-
-        For i = 1 To nodos
-            Apoyos.dgvApoyos.Rows(i - 1).Cells(0).Value = i
-        Next
-
-        If optES.Checked = True Then
-            frmCargasNodos.dgvCargasNodos.Columns(1).HeaderText = "Px (kips)"
-            frmCargasNodos.dgvCargasNodos.Columns(2).HeaderText = "Py (kips)"
-            frmCargasNodos.dgvCargasNodos.Columns(3).HeaderText = "M (kips-ft)"
-        End If
-
-        If optSI.Checked = True Then
-            frmCargasNodos.dgvCargasNodos.Columns(1).HeaderText = "Px (KN)"
-            frmCargasNodos.dgvCargasNodos.Columns(2).HeaderText = "Py (kKN)"
-            frmCargasNodos.dgvCargasNodos.Columns(3).HeaderText = "M (KN-m)"
-        End If
-
-        'Formato de DataGridView en formulario Cargas Puntuales
-        frmCargasNodos.dgvCargasNodos.RowCount = nodos
-        'Enumerar los nodos
-        For i = 1 To nodos
-            frmCargasNodos.dgvCargasNodos.Rows(i - 1).Cells(0).Value = i
-        Next
-
-        'Formato de DataGridView en formulario Cargas en Elementos
-        frmCargasElementos.dgvCargasElem.RowCount = elementos
-        'Enumerar los elementos
-        For i = 1 To elementos
-            frmCargasElementos.dgvCargasElem.Rows(i - 1).Cells(0).Value = i
-        Next
-
-        If optES.Checked = True Then
-            frmCargasElementos.dgvCargasElem.Columns(1).HeaderText = "w (kips/ft)"
-            frmCargasElementos.dgvCargasElem.Columns(2).HeaderText = "P (kips)"
-            frmCargasElementos.dgvCargasElem.Columns(3).HeaderText = "a (ft)"
-            frmCargasElementos.dgvCargasElem.Columns(4).HeaderText = "b (ft)"
-
-        End If
-
-        If optSI.Checked = True Then
-            frmCargasElementos.dgvCargasElem.Columns(1).HeaderText = "w (KN/m)"
-            frmCargasElementos.dgvCargasElem.Columns(2).HeaderText = "P (KN)"
-            frmCargasElementos.dgvCargasElem.Columns(3).HeaderText = "a (m)"
-            frmCargasElementos.dgvCargasElem.Columns(4).HeaderText = "b (m)"
-
-        End If
-
-
-        'Encender los elementos del formulario que estaban apagados inicialmente
-        btnCalcular.Enabled = True
-        btnApoyos.Enabled = True
-        btnCargasNodos.Enabled = True
-        btnCargasElem.Enabled = True
-        dgvElementos.Enabled = True
-        dgvNodos.Enabled = True
 
 
 
