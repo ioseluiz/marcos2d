@@ -938,4 +938,28 @@ Public Class Form1
     Private Sub btnCargasElem_Click(sender As Object, e As EventArgs) Handles btnCargasElem.Click
         frmCargasElementos.Show()
     End Sub
+
+    Private Sub btnLimpiar_Click(sender As Object, e As EventArgs) Handles btnLimpiar.Click
+        'Limpieza de Tablas
+        frmResultados.dgvDesplaz.RowCount = 0
+        frmResultados.dgvFuerzas.RowCount = 0
+        frmResultados.dgvFuerzas.RowCount = 0
+
+        frmCargasNodos.dgvCargasNodos.RowCount = 0
+        frmCargasElementos.dgvCargasElem.RowCount = 0
+
+        Apoyos.dgvApoyos.RowCount = 0
+        dgvElementos.RowCount = 0
+        dgvNodos.RowCount = 0
+
+        txtElementos.Text = ""
+        txtNudos.Text = ""
+
+        btnApoyos.Enabled = False
+        btnCalcular.Enabled = False
+        btnCargasElem.Enabled = False
+        btnCargasNodos.Enabled = False
+        btnResultados.Enabled = False
+
+    End Sub
 End Class

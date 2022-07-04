@@ -46,6 +46,7 @@ Partial Class Form1
         Me.optES = New System.Windows.Forms.RadioButton()
         Me.btnResultados = New System.Windows.Forms.Button()
         Me.btnCargasElem = New System.Windows.Forms.Button()
+        Me.btnLimpiar = New System.Windows.Forms.Button()
         CType(Me.dgvNodos, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgvElementos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -64,7 +65,7 @@ Partial Class Form1
         'txtNudos
         '
         Me.txtNudos.Location = New System.Drawing.Point(98, 58)
-        Me.txtNudos.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtNudos.Margin = New System.Windows.Forms.Padding(2)
         Me.txtNudos.Name = "txtNudos"
         Me.txtNudos.Size = New System.Drawing.Size(88, 20)
         Me.txtNudos.TabIndex = 1
@@ -82,7 +83,7 @@ Partial Class Form1
         'txtElementos
         '
         Me.txtElementos.Location = New System.Drawing.Point(98, 84)
-        Me.txtElementos.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtElementos.Margin = New System.Windows.Forms.Padding(2)
         Me.txtElementos.Name = "txtElementos"
         Me.txtElementos.Size = New System.Drawing.Size(88, 20)
         Me.txtElementos.TabIndex = 3
@@ -90,7 +91,7 @@ Partial Class Form1
         'btnIngresar
         '
         Me.btnIngresar.Location = New System.Drawing.Point(11, 116)
-        Me.btnIngresar.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnIngresar.Margin = New System.Windows.Forms.Padding(2)
         Me.btnIngresar.Name = "btnIngresar"
         Me.btnIngresar.Size = New System.Drawing.Size(173, 27)
         Me.btnIngresar.TabIndex = 4
@@ -107,7 +108,7 @@ Partial Class Form1
         Me.dgvNodos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Nodo, Me.CoorX, Me.CoorY})
         Me.dgvNodos.Enabled = False
         Me.dgvNodos.Location = New System.Drawing.Point(12, 227)
-        Me.dgvNodos.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.dgvNodos.Margin = New System.Windows.Forms.Padding(2)
         Me.dgvNodos.Name = "dgvNodos"
         Me.dgvNodos.RowHeadersVisible = False
         Me.dgvNodos.RowHeadersWidth = 51
@@ -144,7 +145,7 @@ Partial Class Form1
         Me.dgvElementos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Elemento, Me.Ni, Me.Nj, Me.E, Me.Area, Me.Inercia})
         Me.dgvElementos.Enabled = False
         Me.dgvElementos.Location = New System.Drawing.Point(358, 227)
-        Me.dgvElementos.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.dgvElementos.Margin = New System.Windows.Forms.Padding(2)
         Me.dgvElementos.Name = "dgvElementos"
         Me.dgvElementos.RowHeadersVisible = False
         Me.dgvElementos.RowHeadersWidth = 51
@@ -277,11 +278,21 @@ Partial Class Form1
         Me.btnCargasElem.Text = "Cargas Elementos"
         Me.btnCargasElem.UseVisualStyleBackColor = True
         '
+        'btnLimpiar
+        '
+        Me.btnLimpiar.Location = New System.Drawing.Point(13, 160)
+        Me.btnLimpiar.Name = "btnLimpiar"
+        Me.btnLimpiar.Size = New System.Drawing.Size(171, 27)
+        Me.btnLimpiar.TabIndex = 16
+        Me.btnLimpiar.Text = "Limpiar"
+        Me.btnLimpiar.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1031, 527)
+        Me.Controls.Add(Me.btnLimpiar)
         Me.Controls.Add(Me.btnCargasElem)
         Me.Controls.Add(Me.btnResultados)
         Me.Controls.Add(Me.GroupBox1)
@@ -295,7 +306,7 @@ Partial Class Form1
         Me.Controls.Add(Me.lblElementos)
         Me.Controls.Add(Me.txtNudos)
         Me.Controls.Add(Me.lblNudos)
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "Form1"
         Me.Text = "Form1"
         CType(Me.dgvNodos, System.ComponentModel.ISupportInitialize).EndInit()
@@ -331,4 +342,5 @@ Partial Class Form1
     Friend WithEvents E As DataGridViewTextBoxColumn
     Friend WithEvents Area As DataGridViewTextBoxColumn
     Friend WithEvents Inercia As DataGridViewTextBoxColumn
+    Friend WithEvents btnLimpiar As Button
 End Class
