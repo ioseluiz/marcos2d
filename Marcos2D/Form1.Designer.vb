@@ -47,53 +47,53 @@ Partial Class Form1
         Me.btnResultados = New System.Windows.Forms.Button()
         Me.btnCargasElem = New System.Windows.Forms.Button()
         Me.btnLimpiar = New System.Windows.Forms.Button()
+        Me.picBoxLogo = New System.Windows.Forms.PictureBox()
         CType(Me.dgvNodos, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgvElementos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
+        CType(Me.picBoxLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lblNudos
         '
         Me.lblNudos.AutoSize = True
-        Me.lblNudos.Location = New System.Drawing.Point(9, 61)
-        Me.lblNudos.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblNudos.Location = New System.Drawing.Point(12, 75)
         Me.lblNudos.Name = "lblNudos"
-        Me.lblNudos.Size = New System.Drawing.Size(66, 13)
+        Me.lblNudos.Size = New System.Drawing.Size(86, 17)
         Me.lblNudos.TabIndex = 0
         Me.lblNudos.Text = "Cant. Nudos"
         '
         'txtNudos
         '
-        Me.txtNudos.Location = New System.Drawing.Point(98, 58)
-        Me.txtNudos.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtNudos.Location = New System.Drawing.Point(131, 71)
+        Me.txtNudos.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.txtNudos.Name = "txtNudos"
-        Me.txtNudos.Size = New System.Drawing.Size(88, 20)
+        Me.txtNudos.Size = New System.Drawing.Size(116, 22)
         Me.txtNudos.TabIndex = 1
         '
         'lblElementos
         '
         Me.lblElementos.AutoSize = True
-        Me.lblElementos.Location = New System.Drawing.Point(9, 86)
-        Me.lblElementos.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblElementos.Location = New System.Drawing.Point(12, 106)
         Me.lblElementos.Name = "lblElementos"
-        Me.lblElementos.Size = New System.Drawing.Size(84, 13)
+        Me.lblElementos.Size = New System.Drawing.Size(111, 17)
         Me.lblElementos.TabIndex = 2
         Me.lblElementos.Text = "Cant. Elementos"
         '
         'txtElementos
         '
-        Me.txtElementos.Location = New System.Drawing.Point(98, 84)
-        Me.txtElementos.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtElementos.Location = New System.Drawing.Point(131, 103)
+        Me.txtElementos.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.txtElementos.Name = "txtElementos"
-        Me.txtElementos.Size = New System.Drawing.Size(88, 20)
+        Me.txtElementos.Size = New System.Drawing.Size(116, 22)
         Me.txtElementos.TabIndex = 3
         '
         'btnIngresar
         '
-        Me.btnIngresar.Location = New System.Drawing.Point(11, 116)
-        Me.btnIngresar.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnIngresar.Location = New System.Drawing.Point(15, 143)
+        Me.btnIngresar.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnIngresar.Name = "btnIngresar"
-        Me.btnIngresar.Size = New System.Drawing.Size(173, 27)
+        Me.btnIngresar.Size = New System.Drawing.Size(231, 33)
         Me.btnIngresar.TabIndex = 4
         Me.btnIngresar.Text = "Ingresar"
         Me.btnIngresar.UseVisualStyleBackColor = True
@@ -107,13 +107,13 @@ Partial Class Form1
         Me.dgvNodos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvNodos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Nodo, Me.CoorX, Me.CoorY})
         Me.dgvNodos.Enabled = False
-        Me.dgvNodos.Location = New System.Drawing.Point(12, 227)
-        Me.dgvNodos.Margin = New System.Windows.Forms.Padding(2)
+        Me.dgvNodos.Location = New System.Drawing.Point(16, 279)
+        Me.dgvNodos.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.dgvNodos.Name = "dgvNodos"
         Me.dgvNodos.RowHeadersVisible = False
         Me.dgvNodos.RowHeadersWidth = 51
         Me.dgvNodos.RowTemplate.Height = 24
-        Me.dgvNodos.Size = New System.Drawing.Size(307, 274)
+        Me.dgvNodos.Size = New System.Drawing.Size(409, 337)
         Me.dgvNodos.TabIndex = 5
         '
         'Nodo
@@ -144,13 +144,13 @@ Partial Class Form1
         Me.dgvElementos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvElementos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Elemento, Me.Ni, Me.Nj, Me.E, Me.Area, Me.Inercia})
         Me.dgvElementos.Enabled = False
-        Me.dgvElementos.Location = New System.Drawing.Point(358, 227)
-        Me.dgvElementos.Margin = New System.Windows.Forms.Padding(2)
+        Me.dgvElementos.Location = New System.Drawing.Point(477, 279)
+        Me.dgvElementos.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.dgvElementos.Name = "dgvElementos"
         Me.dgvElementos.RowHeadersVisible = False
         Me.dgvElementos.RowHeadersWidth = 51
         Me.dgvElementos.RowTemplate.Height = 24
-        Me.dgvElementos.Size = New System.Drawing.Size(606, 274)
+        Me.dgvElementos.Size = New System.Drawing.Size(808, 337)
         Me.dgvElementos.TabIndex = 6
         '
         'Elemento
@@ -198,9 +198,10 @@ Partial Class Form1
         'btnCalcular
         '
         Me.btnCalcular.Enabled = False
-        Me.btnCalcular.Location = New System.Drawing.Point(219, 137)
+        Me.btnCalcular.Location = New System.Drawing.Point(292, 169)
+        Me.btnCalcular.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnCalcular.Name = "btnCalcular"
-        Me.btnCalcular.Size = New System.Drawing.Size(107, 27)
+        Me.btnCalcular.Size = New System.Drawing.Size(143, 33)
         Me.btnCalcular.TabIndex = 7
         Me.btnCalcular.Text = "Calcular"
         Me.btnCalcular.UseVisualStyleBackColor = True
@@ -208,9 +209,10 @@ Partial Class Form1
         'btnApoyos
         '
         Me.btnApoyos.Enabled = False
-        Me.btnApoyos.Location = New System.Drawing.Point(219, 19)
+        Me.btnApoyos.Location = New System.Drawing.Point(292, 23)
+        Me.btnApoyos.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnApoyos.Name = "btnApoyos"
-        Me.btnApoyos.Size = New System.Drawing.Size(107, 27)
+        Me.btnApoyos.Size = New System.Drawing.Size(143, 33)
         Me.btnApoyos.TabIndex = 10
         Me.btnApoyos.Text = "Apoyos"
         Me.btnApoyos.UseVisualStyleBackColor = True
@@ -218,9 +220,10 @@ Partial Class Form1
         'btnCargasNodos
         '
         Me.btnCargasNodos.Enabled = False
-        Me.btnCargasNodos.Location = New System.Drawing.Point(219, 54)
+        Me.btnCargasNodos.Location = New System.Drawing.Point(292, 66)
+        Me.btnCargasNodos.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnCargasNodos.Name = "btnCargasNodos"
-        Me.btnCargasNodos.Size = New System.Drawing.Size(107, 35)
+        Me.btnCargasNodos.Size = New System.Drawing.Size(143, 43)
         Me.btnCargasNodos.TabIndex = 11
         Me.btnCargasNodos.Text = "Cargas Nodos"
         Me.btnCargasNodos.UseVisualStyleBackColor = True
@@ -229,9 +232,11 @@ Partial Class Form1
         '
         Me.GroupBox1.Controls.Add(Me.optSI)
         Me.GroupBox1.Controls.Add(Me.optES)
-        Me.GroupBox1.Location = New System.Drawing.Point(11, 4)
+        Me.GroupBox1.Location = New System.Drawing.Point(15, 5)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(173, 48)
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox1.Size = New System.Drawing.Size(231, 59)
         Me.GroupBox1.TabIndex = 12
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Unidades"
@@ -239,9 +244,10 @@ Partial Class Form1
         'optSI
         '
         Me.optSI.AutoSize = True
-        Me.optSI.Location = New System.Drawing.Point(70, 20)
+        Me.optSI.Location = New System.Drawing.Point(93, 25)
+        Me.optSI.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.optSI.Name = "optSI"
-        Me.optSI.Size = New System.Drawing.Size(35, 17)
+        Me.optSI.Size = New System.Drawing.Size(41, 21)
         Me.optSI.TabIndex = 1
         Me.optSI.TabStop = True
         Me.optSI.Text = "SI"
@@ -250,9 +256,10 @@ Partial Class Form1
         'optES
         '
         Me.optES.AutoSize = True
-        Me.optES.Location = New System.Drawing.Point(16, 20)
+        Me.optES.Location = New System.Drawing.Point(21, 25)
+        Me.optES.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.optES.Name = "optES"
-        Me.optES.Size = New System.Drawing.Size(39, 17)
+        Me.optES.Size = New System.Drawing.Size(47, 21)
         Me.optES.TabIndex = 0
         Me.optES.TabStop = True
         Me.optES.Text = "ES"
@@ -261,9 +268,10 @@ Partial Class Form1
         'btnResultados
         '
         Me.btnResultados.Enabled = False
-        Me.btnResultados.Location = New System.Drawing.Point(219, 172)
+        Me.btnResultados.Location = New System.Drawing.Point(292, 212)
+        Me.btnResultados.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnResultados.Name = "btnResultados"
-        Me.btnResultados.Size = New System.Drawing.Size(107, 26)
+        Me.btnResultados.Size = New System.Drawing.Size(143, 32)
         Me.btnResultados.TabIndex = 14
         Me.btnResultados.Text = "Resultados"
         Me.btnResultados.UseVisualStyleBackColor = True
@@ -271,27 +279,40 @@ Partial Class Form1
         'btnCargasElem
         '
         Me.btnCargasElem.Enabled = False
-        Me.btnCargasElem.Location = New System.Drawing.Point(219, 95)
+        Me.btnCargasElem.Location = New System.Drawing.Point(292, 117)
+        Me.btnCargasElem.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnCargasElem.Name = "btnCargasElem"
-        Me.btnCargasElem.Size = New System.Drawing.Size(107, 35)
+        Me.btnCargasElem.Size = New System.Drawing.Size(143, 43)
         Me.btnCargasElem.TabIndex = 15
         Me.btnCargasElem.Text = "Cargas Elementos"
         Me.btnCargasElem.UseVisualStyleBackColor = True
         '
         'btnLimpiar
         '
-        Me.btnLimpiar.Location = New System.Drawing.Point(13, 160)
+        Me.btnLimpiar.Location = New System.Drawing.Point(17, 197)
+        Me.btnLimpiar.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnLimpiar.Name = "btnLimpiar"
-        Me.btnLimpiar.Size = New System.Drawing.Size(171, 27)
+        Me.btnLimpiar.Size = New System.Drawing.Size(228, 33)
         Me.btnLimpiar.TabIndex = 16
         Me.btnLimpiar.Text = "Limpiar"
         Me.btnLimpiar.UseVisualStyleBackColor = True
         '
+        'picBoxLogo
+        '
+        Me.picBoxLogo.Image = Global.Marcos2D.My.Resources.Resources.FRAME2D_LOGO
+        Me.picBoxLogo.Location = New System.Drawing.Point(685, 5)
+        Me.picBoxLogo.Name = "picBoxLogo"
+        Me.picBoxLogo.Size = New System.Drawing.Size(292, 269)
+        Me.picBoxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.picBoxLogo.TabIndex = 17
+        Me.picBoxLogo.TabStop = False
+        '
         'Form1
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1031, 527)
+        Me.ClientSize = New System.Drawing.Size(1375, 649)
+        Me.Controls.Add(Me.picBoxLogo)
         Me.Controls.Add(Me.btnLimpiar)
         Me.Controls.Add(Me.btnCargasElem)
         Me.Controls.Add(Me.btnResultados)
@@ -306,13 +327,14 @@ Partial Class Form1
         Me.Controls.Add(Me.lblElementos)
         Me.Controls.Add(Me.txtNudos)
         Me.Controls.Add(Me.lblNudos)
-        Me.Margin = New System.Windows.Forms.Padding(2)
+        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "Form1"
         Me.Text = "Form1"
         CType(Me.dgvNodos, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgvElementos, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        CType(Me.picBoxLogo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -343,4 +365,5 @@ Partial Class Form1
     Friend WithEvents Area As DataGridViewTextBoxColumn
     Friend WithEvents Inercia As DataGridViewTextBoxColumn
     Friend WithEvents btnLimpiar As Button
+    Friend WithEvents picBoxLogo As PictureBox
 End Class
